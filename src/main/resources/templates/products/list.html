@@ -109,10 +109,15 @@
                             <td class="text-center text-muted small"
                                 th:text="${#temporals.format(p.createdAt, 'yyyy-MM-dd')}"></td>
                             <td class="text-center" sec:authorize="hasRole('ADMIN')">
-                                <form th:action="@{/products/{id}/delete(id=${p.id})}" method="post"
-                                      onsubmit="return confirm('삭제하시겠습니까?')">
-                                    <button class="btn btn-outline-danger btn-sm">삭제</button>
-                                </form>
+                                <div class="d-flex justify-content-center gap-1">
+                                    <form th:action="@{/products/{id}/edit(id=${p.id})}" method="get">
+                                        <button class="btn btn-outline-primary btn-sm">수정</button>
+                                    </form>
+                                    <form th:action="@{/products/{id}/delete(id=${p.id})}" method="post"
+                                          onsubmit="return confirm('삭제하시겠습니까?')">
+                                        <button class="btn btn-outline-danger btn-sm">삭제</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
