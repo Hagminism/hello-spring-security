@@ -79,6 +79,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Validation -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
         <!-- H2 In-Memory DB for tests -->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -89,6 +96,30 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.12.1</version>
+                <configuration>
+                    <!-- release: source + target + 시스템모듈 위치를 한 번에 설정 -->
+                    <release>21</release>
+                    <encoding>UTF-8</encoding>
+                    <!-- -parameters: 생성자/메서드의 파라미터 이름을 바이트코드에 포함시킵니다.
+                         Spring 7.x의 @ModelAttribute가 생성자 바인딩 시 파라미터 이름을
+                         리플렉션으로 읽어야 하므로 이 옵션이 없으면 예외가 발생합니다. -->
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                    <!-- Lombok 어노테이션 프로세서 등록 -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.38</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
