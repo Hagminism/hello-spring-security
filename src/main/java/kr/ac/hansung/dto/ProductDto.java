@@ -17,4 +17,7 @@ public class ProductDto {
 
     @Min(value = 0)
     private int stock;
+
+    @NotBlank
+    private String description;
 }
